@@ -1,3 +1,4 @@
+import Footer from "../components/footer"
 import Header from "../components/header"
 import style from "./style.css"
 
@@ -6,7 +7,7 @@ function Home() {
     return (
         <div>
             <Header/>
-            <div class="hero">
+            <div className="hero">
                 <section class="hero-content">
                 <h2 class="sr-only">Promoted Content</h2>
                 <p class="subtitle">No fees.</p>
@@ -49,6 +50,7 @@ function Home() {
           </p>
         </div>
       </section>
+      <Footer/>
         </div>
         
 

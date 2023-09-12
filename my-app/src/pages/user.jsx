@@ -1,3 +1,4 @@
+import Footer from "../components/footer"
 
 
 function User() {
@@ -61,6 +62,7 @@ function User() {
                 </div>
             </section>
             </main>
+            <Footer/>
        </div>
         
        

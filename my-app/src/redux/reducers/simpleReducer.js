@@ -1,3 +1,6 @@
+
+
+
 const initialState = {
   result: "",
   fruitOne: "",
@@ -22,3 +25,8 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+
+
+
+
