@@ -5,18 +5,18 @@ import Signin from "./pages/sign-in";
 import Home from "./pages/home";
 import User from "./pages/user";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import {  persistStore } from 'redux-persist'
+
 import { PersistGate } from 'redux-persist/es/integration/react'
-import { useStore } from "react-redux";
 
 
-const store = configureStore();
-let persistor = persistStore(store);
+
+const {store, persistor} = configureStore();
+
 
 const App = () => {
   return (
     <Provider store={store}>
-      <PersistGate  persistor={persistor}>
+      <PersistGate loading={null} persistor={persistor}>
          <BrowserRouter>
             <Routes>
                 <Route path="/sign-in" element={<Signin />} />

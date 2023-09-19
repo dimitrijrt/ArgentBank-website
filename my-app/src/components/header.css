@@ -8,6 +8,7 @@
 .main-nav a {
     font-weight: bold;
     color: #2c3e50;
+    margin-left: 10px;
 }
 
 .main-nav a.router-link-exact-active {
@@ -43,4 +44,18 @@
 .footer-text {
     margin: 0;
     padding: 0;
+}
+
+.edit {
+    margin: 20px;
+    
+}
+
+.form {
+    padding: 8px;
+}
+
+.edit button {
+    border-radius: 6px;
+    margin-left: 6px;
 }

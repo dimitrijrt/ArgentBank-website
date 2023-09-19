@@ -3,24 +3,30 @@ import Footer from "../components/footer"
 import Header from "../components/header"
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
- import axios from "axios";
+ import {useDispatch, useSelector} from "react-redux";
+import {setToken, setUser} from "../redux/actions/actions"
+import {getUser} from "../Services/user.services"
+import { useEffect } from "react";
 
 
-const hostname = "http://localhost:3001";
+
 
 function Signin() {
    
     const [email,setEmail] = useState("")
     const [password,setPassword] = useState("")
      const navigate = useNavigate();
+     const dispatch = useDispatch();
+     const isLogged = useSelector((state) => !!state.userState.user && !!state.userState.token);
     
 
     const onSubmit = async (e) => {
         try {
             e.preventDefault()
-            const request = await axios.post(`${hostname}/api/v1/user/login`)
             const response = await signin(email,password)
-            console.log(response)
+            dispatch(setToken(response.body.token));
+            const responseUser = await getUser(response.body.token);
+            dispatch(setUser(responseUser.body));
             navigate("/profile")
         }
         catch { 
@@ -28,6 +34,10 @@ function Signin() {
 
         }
     }
+
+   
+
+   
     return (
         <div>
             <Header/>

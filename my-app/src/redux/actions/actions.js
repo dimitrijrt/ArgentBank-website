@@ -1,31 +1,24 @@
-import { setAuth } from "../reducers/reducer";
+export const SET_TOKEN = "SET_TOKEN";
 
+export const SET_USER = "SET_USER";
+export const REMOVE_TOKEN ="REMOVE_TOKEN";
 
-export const login = (email, password) => async (dispatch) => {
-  try {
-    const response = await fetch("http://localhost:3001/api/v1/user/login", {
-      method: "POST",
-      headers: {
-        accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
+export const setToken = (token) => (dispatch) => {
+  dispatch({
+    type: SET_TOKEN,
+    payload: token
+  })
+}
+
+export const setUser = (user) => (dispatch) => {
+  dispatch({
+    type: SET_USER,
+    payload: user
+  })
+}
+
+export const removeToken = () => (dispatch) => {
+    dispatch({
+        type: REMOVE_TOKEN,
     });
-
-    const data = await response.json();
-
-    dispatch(
-      setAuth({
-        email: email,
-        isLoggedIn: true,
-        token: data.body["token"],
-      })
-    );
-  } catch (error) {
-    console.log(error);
-    
-  }
 };

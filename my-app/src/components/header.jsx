@@ -1,23 +1,34 @@
 
 import { Link } from "react-router-dom"
 import style from "./header.css"
+import { useEffect, useState, useRef } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setToken, setUser, removeToken} from "../redux/actions/actions";
+
 
 function Header()
     {
+        
+        const token = useSelector((state) => state.token);
+        const user = useSelector((state) => state.userState.user);
+        const dispatch = useDispatch();
+
+        function signOut() {
+        dispatch(removeToken());
+  }
         return (
             
                 <nav class="main-nav">
                     <Link class="main-nav-logo" to="/user"/>
                     <img
                     className="main-nav-logo-image"
-                    src="./argentBankLogo.png"
+                    src="../..public/argentBankLogo.png"
                     alt="Argent Bank Logo"
                     />
-                    <div>
-                        <a className="main-nav-item" href="/sign-in"/>
-                        <i className="fa fa-user-circle"></i>
+                    <div className="navlink">
+                      <i className="fa fa-user-circle"></i>
                       <Link to="sign-in">Sign-in</Link>
-                       
+                      <Link to="/" onClick={signOut}>Sign-out</Link>  
                     </div>
                 </nav>
         

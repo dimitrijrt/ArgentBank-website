@@ -1,7 +1,39 @@
 import Footer from "../components/footer"
+import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setToken, setUser, removeToken} from "../redux/actions/actions";
+import Edit from '../components/edit'
+
+
+
+
+
 
 
 function User() {
+
+     const navigate = useNavigate();
+    const isLogged = useSelector((state) => !!state.userState.user && !!state.userState.token);
+    const token = useSelector((state) => state.token);
+    const user = useSelector((state) => state.userState.user);
+    const dispatch = useDispatch();
+    const [toggle, setToggle] = useState(false);
+
+
+    useEffect(() => {
+    if (!isLogged) {
+      navigate("/")
+    }
+  }, )
+     
+
+    
+   function signOut() {
+    dispatch(removeToken());
+  }
+
+  
 
     return (
        <div>
@@ -15,20 +47,27 @@ function User() {
                 <h1 class="sr-only">Argent Bank</h1>
             </a>
             <div>
-                <a class="main-nav-item" href="./user.html">
+                <a class="main-nav-item" href="./profile">
                 <i class="fa fa-user-circle"></i>
-                Tony
+                {user.firstName}
                 </a>
-                <a class="main-nav-item" href="./index.html">
+                <a class="main-nav-item" href="/" onClick={signOut}>
                 <i class="fa fa-sign-out"></i>
                 Sign Out
                 </a>
             </div>
             </nav>
             <main class="main bg-dark">
+            
+            
+            
             <div class="header">
-                <h1>Welcome back<br />Tony Jarvis!</h1>
-                <button class="edit-button">Edit Name</button>
+                <h1>Welcome back<br />{user.firstName} {user.lastName}</h1>
+                <button class="edit-button" onClick={() => setToggle(!toggle)}>Edit Name</button>
+                {toggle
+                    ? <Edit  />
+                : ''}
+               
             </div>
             <h2 class="sr-only">Accounts</h2>
             <section class="account">
@@ -64,6 +103,8 @@ function User() {
             </main>
             <Footer/>
        </div>
+       
+      
         
        
 
