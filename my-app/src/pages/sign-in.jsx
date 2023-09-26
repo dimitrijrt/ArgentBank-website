@@ -35,9 +35,6 @@ function Signin() {
         }
     }
 
-   
-
-   
     return (
         <div>
             <Header/>

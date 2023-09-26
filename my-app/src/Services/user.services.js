@@ -30,7 +30,7 @@ export const getUser = async (token) => {
 
 
 
-export async function getUserName(token, firstName, lastName) {
+export async function updateUser(token,userName) {
     const response = await fetch("http://localhost:3001/api/v1/user/profile", {
         method: "put",
         headers: {
@@ -39,7 +39,7 @@ export async function getUserName(token, firstName, lastName) {
             'Authorization': `Bearer ${token}`
             
         },
-        body: JSON.stringify( {firstName, lastName})
+        body: JSON.stringify( {userName})
     });
     return await response.json();
 }

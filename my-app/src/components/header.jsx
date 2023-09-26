@@ -4,6 +4,7 @@ import style from "./header.css"
 import { useEffect, useState, useRef } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setToken, setUser, removeToken} from "../redux/actions/actions";
+import Logo from '../../src/assets/argentBankLogo.png'
 
 
 function Header()
@@ -22,7 +23,7 @@ function Header()
                     <Link class="main-nav-logo" to="/user"/>
                     <img
                     className="main-nav-logo-image"
-                    src="../..public/argentBankLogo.png"
+                    src={Logo}
                     alt="Argent Bank Logo"
                     />
                     <div className="navlink">

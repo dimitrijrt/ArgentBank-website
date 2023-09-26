@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {setToken, setUser, removeToken} from "../redux/actions/actions";
 import Edit from '../components/edit'
+import Logo from '../../src/assets/argentBankLogo.png'
 
 
 
@@ -41,7 +42,7 @@ function User() {
             <a class="main-nav-logo" href="./index.html">
                 <img
                 class="main-nav-logo-image"
-                src="./img/argentBankLogo.png"
+                src={Logo}
                 alt="Argent Bank Logo"
                 />
                 <h1 class="sr-only">Argent Bank</h1>
@@ -62,7 +63,7 @@ function User() {
             
             
             <div class="header">
-                <h1>Welcome back<br />{user.firstName} {user.lastName}</h1>
+                <h1>Welcome back<br />{user.userName}</h1>
                 <button class="edit-button" onClick={() => setToggle(!toggle)}>Edit Name</button>
                 {toggle
                     ? <Edit  />
