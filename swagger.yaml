@@ -26,7 +26,6 @@ paths:
           - in: path
             type: number
             name: id
-            description: id Transaction
             required: true
       produces:
         - application/json
@@ -39,6 +38,7 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+  /user/profile/transactions/{transactionid}:
     put:
       security:
         - Bearer: []
@@ -54,7 +54,7 @@ paths:
           required: true
         - in: path
           type: number
-          name: id
+          name: transactionid
           description: id Transaction
           required: true
         - in: body
@@ -231,27 +231,32 @@ definitions:
       body:
         type: object
         properties:
-          id:
+          accountname:
             type: string
-          transactionDate:
-            type: string
-          transactionDescription:
-            type: string
-          transactionAmount:
-            type: string
-          transactionBalance:
-            type: string
-          transactionType:
-            type: string
-          transactionCategorie:
-            type: string
-          transactionNotes:
-            type: string
+          transaction:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: string
+                Date:
+                  type: string
+                Description:
+                  type: string
+                Amount:
+                  type: string
+                Balance:
+                  type: string
+                Type:
+                  type: string
+                Categorie:
+                  type: string
+                Notes:
+                  type: string
   UpdateTransaction:
     type: object
     properties:
-          id:
-            type: string
           notes:
             type: string
           categorie:
