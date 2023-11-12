@@ -23,7 +23,7 @@ export default function configureStore(initialState = {}) {
   const store = createStore(
     persistedReducer,
     initialState,
-     composeEnhancers(applyMiddleware(thunk))
+     composeEnhancers(applyMiddleware(thunk)) // redux devtool
   );
 
 const persistor = persistStore(store)

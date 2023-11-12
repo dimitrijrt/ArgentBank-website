@@ -12,8 +12,8 @@ export const setToken = (token) => (dispatch) => {
 
 export const setUser = (user) => (dispatch) => {
   dispatch({
-    type: SET_USER,
-    payload: user
+    type: SET_USER, // how to modify
+    payload: user // what data
   })
 }
 

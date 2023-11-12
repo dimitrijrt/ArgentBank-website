@@ -24,7 +24,7 @@ function Signin() {
         try {
             e.preventDefault()
             const response = await signin(email,password)
-            dispatch(setToken(response.body.token));
+            dispatch(setToken(response.body.token)); // action
             const responseUser = await getUser(response.body.token);
             dispatch(setUser(responseUser.body));
             navigate("/profile")

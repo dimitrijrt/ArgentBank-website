@@ -9,13 +9,13 @@ basePath: /api/v1
 schemes:
   - http
 paths:
-  /user/profile/{id}/transactions:
+  /{id}/transactions:
     get:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: User Profile API
+        - Transaction Module
+      summary: Transaction Profile API
       description: API for fetching transactions
       parameters:
           - in: header
@@ -33,19 +33,48 @@ paths:
         '200':
           description: transactions retrieved successully
           schema:
+            $ref: '#/definitions/TransacsResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    
+  /transactions/{transactionid}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: Transactions Profile API
+      description: API for fetching transaction
+      parameters:
+          - in: header
+            type: string
+            name: Authorization
+            description: Attach Bearer JWT token
+            required: true
+          - in: path
+            type: number
+            name: transactionid
+            required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: transaction retrieved successully
+          schema:
             $ref: '#/definitions/TransacResponse'
         '400':
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /user/profile/transactions/{transactionid}:
     put:
       security:
         - Bearer: []
       tags:
-        - User Module
-      summary: User Profile API
-      description: API for updating transactions
+        - Transaction Module
+      summary: Transaction Profile API
+      description: API for updating transaction
       parameters:
         - in: header
           type: string
@@ -67,9 +96,44 @@ paths:
         - application/json
       responses:
         '200':
-          description: Transactions retrieved successully
+          description: Transactions updated successully
           schema:
             $ref: '#/definitions/UpdateTransaction'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+    delete:
+      security:
+        - Bearer: []
+      tags:
+        - Transaction Module
+      summary: User Profile API
+      description: API for deleting transactions attributes
+      parameters:
+        - in: header
+          type: string
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: path
+          type: number
+          name: transactionid
+          description: id Transaction
+          required: true
+        - in: body
+          name: body
+          description: Delete transactions attributes
+          required: true
+          schema:
+            $ref: '#/definitions/DeleteTransaction'
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Transactions deleted successully
+          schema:
+            $ref: '#/definitions/DeleteTransaction'
         '400':
           description: Invalid Fields
         '500':
@@ -221,7 +285,7 @@ definitions:
     properties:
       userName:
         type: string
-  TransacResponse:
+  TransacsResponse:
     type: object
     properties:
       status:
@@ -233,27 +297,45 @@ definitions:
         properties:
           accountname:
             type: string
-          transaction:
+          transactions:
             type: array
             items:
               type: object
               properties:
                 id:
                   type: string
-                Date:
+                date:
                   type: string
-                Description:
+                description:
                   type: string
-                Amount:
+                amount:
+                  type: integer
+                balance:
+                  type: integer
+                type:
                   type: string
-                Balance:
+                categorie:
                   type: string
-                Type:
+                notes:
                   type: string
-                Categorie:
-                  type: string
-                Notes:
-                  type: string
+  TransacResponse:
+    type: object
+    properties:
+      date:
+        type: string
+      description:
+        type: string
+      amount: 
+        type: integer
+      balance:
+        type: integer
+      transaction_type:
+        type: string
+        description: type of transaction 
+      category:
+        type: string
+      note: 
+        type: string
   UpdateTransaction:
     type: object
     properties:
@@ -261,3 +343,11 @@ definitions:
             type: string
           categorie:
             type: string
+  DeleteTransaction:
+    type: object
+    properties:
+          notes:
+            type: string
+          categorie:
+            type: string
+  
